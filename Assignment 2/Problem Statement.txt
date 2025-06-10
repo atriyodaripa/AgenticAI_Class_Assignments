@@ -1,0 +1,20 @@
+**Assignment: 2**
+
+ Take multiple PDF with text, image, table
+
+1. fetch the data from PDF
+2. at least there should be 200 pages
+3. if chunking (use the semantic chunking technique) required, do chunking and then embedding
+4. store it inside the vector database (use any of them:
+    1. mongodb
+    2. astradb
+    3. opensearch
+    4. milvus)
+5. create an index with all three index mechanisms (Flat, HNSW, IVF)
+6. create a retriever pipeline
+7. check the retriever time (which one is fastest)
+8. print the accuracy score of every similarity search
+9. perform the re-ranking either using BM25 or MMR ## i g...
+10. then write a prompt template
+11. generate an output through LLM
+12. render that output over the DOCx

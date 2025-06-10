@@ -1,0 +1,6 @@
+Use Case: Developing an LLM chatbot that would give product details
+
+Requirements: 
+*  Name of the product. 
+*  Description of the product. 
+*  Price of the product in USD
