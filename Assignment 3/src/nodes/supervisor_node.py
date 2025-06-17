@@ -5,7 +5,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(
                   os.pardir,os.pardir)
 )
 sys.path.append(PROJECT_ROOT)
-print(sys.path)
+# print(sys.path)
 from utils.model_loader import ModelLoader
 from src.state import AgentState
 from src.output_parsers.supervisor_parser import supervisor_parser

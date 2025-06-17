@@ -5,7 +5,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(
                   os.pardir,os.pardir)
 )
 sys.path.append(PROJECT_ROOT)
-print(sys.path)
+# print(sys.path)
 from utils.model_loader import ModelLoader
 from src.state import AgentState
 from src.output_parsers.validator_parser import validator_parser
@@ -72,17 +72,19 @@ class ValidatorNode:
         question = state["messages"][0]
         answer = state["messages"][-1]
         context = state["contexts"]
-        print(f"context: {context}")
+        # print(f"context: {context}")
         if not context:
             print("Context is empty")
-            validator_llm_chain = self.validator_llm_response_prompt | self.llm | validator_parser
+            validator_llm_response_prompt = self.validator_llm_response_prompt()
+            validator_llm_chain = validator_llm_response_prompt | self.llm | validator_parser
             response = validator_llm_chain.invoke({
             "query": question,
             "intermediate_response": answer
             })
         else:
             print("Context is not empty")
-            validator_rag_chain = self.validator_rag_response_prompt | self.llm | validator_parser
+            validator_rag_response_prompt = self.validator_rag_response_prompt()
+            validator_rag_chain = validator_rag_response_prompt | self.llm | validator_parser
             response = validator_rag_chain.invoke({
                 "query": question,
                 "context": context,
