@@ -1,11 +1,22 @@
-from src.utils import get_llm_model
+import sys
+import sys
+import os
+PROJECT_ROOT = os.path.abspath(os.path.join(
+                  os.path.dirname(__file__), 
+                  os.pardir,os.pardir)
+)
+sys.path.append(PROJECT_ROOT)
+print(sys.path)
+from utils.model_loader import ModelLoader
 from src.state import AgentState
 from src.output_parsers.supervisor_parser import supervisor_parser
 from langchain.prompts import PromptTemplate
 
 class SupervisorNode:
     def __init__(self):
-        self.llm = get_llm_model()
+        print("Initializing LLMNode Class...")
+        self.model_loader=ModelLoader()
+        self.llm = self.model_loader.load_llm()
 
     def function_supervisor(self, state:AgentState):
         print("-> Inside Supervisor Function <-")
@@ -33,3 +44,9 @@ class SupervisorNode:
 
         print("Parsed response", response)
         return {"messages": [response.Topic]}
+
+if __name__ == "__main__":
+    supervisor = SupervisorNode()
+    state={"messages":["What is the current weather of West Bengal?"]}
+    response = supervisor.function_supervisor(state)
+    print(response)
