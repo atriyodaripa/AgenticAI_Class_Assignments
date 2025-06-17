@@ -1,5 +1,4 @@
 import sys
-import sys
 import os
 PROJECT_ROOT = os.path.abspath(os.path.join(
                   os.path.dirname(__file__), 
@@ -14,7 +13,7 @@ from langchain.prompts import PromptTemplate
 
 class SupervisorNode:
     def __init__(self):
-        print("Initializing LLMNode Class...")
+        print("Initializing SupervisorNode Class...")
         self.model_loader=ModelLoader()
         self.llm = self.model_loader.load_llm()
 
