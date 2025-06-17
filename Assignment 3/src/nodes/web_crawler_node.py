@@ -7,10 +7,11 @@ PROJECT_ROOT = os.path.abspath(os.path.join(
 sys.path.append(PROJECT_ROOT)
 print(sys.path)
 from utils.model_loader import ModelLoader
+from utils.web_crawler import WebCrawler
 from src.state import AgentState
 from src.output_parsers.supervisor_parser import supervisor_parser
 from langchain.prompts import PromptTemplate
-from langchain_tavily import TavilySearch
+
 from langchain_core.runnables import RunnableLambda
 from langchain_core.output_parsers import StrOutputParser
 
@@ -19,14 +20,10 @@ class WebCrawlerNode:
         print("Initializing WebCrawlerNode Class...")
         self.model_loader=ModelLoader()
         self.llm = self.model_loader.load_llm()
-        self.tavily_tool = TavilySearch(max_results=5, topic="news")
-    
+        self.web = WebCrawler()
+
     def _web_retriever(self, query):
-        # query = inputs["question"]
-        result = self.tavily_tool.invoke({"query": query})
-        snippets = [r["content"] for r in result["results"] if "content" in r]
-        # return "\n\n".join(snippets)
-        return {"context": "\n\n".join(snippets), "question": query}
+        return self.web.web_retriever(query)
 
     def function_web_crawl(self, state:AgentState):
         print("-> Inside Web Crawler <-")
