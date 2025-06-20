@@ -8,8 +8,8 @@ from langgraph.graph import StateGraph, MessagesState, END, START
 from langgraph.prebuilt import ToolNode, tools_condition
 
 class GraphBuilder:
-    def __init__(self):
-        self.model_loader = ModelLoader()
+    def __init__(self, model_provider: str = "groq"):
+        self.model_loader = ModelLoader(model_provider=model_provider)
         self.llm = self.model_loader.load_llm()
         self.tools = []
         self.weather_tools = WeatherInfoTool()
@@ -41,6 +41,7 @@ class GraphBuilder:
         graph_builder.add_edge("agent",END)
 
         self.graph = graph_builder.compile()
+        return self.graph
 
     
 
