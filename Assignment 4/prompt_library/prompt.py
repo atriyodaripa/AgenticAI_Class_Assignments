@@ -9,6 +9,7 @@ SYSTEM_PROMPT = SystemMessage(
     in and around the requested place.  
     Give full information immediately including:
     - Complete day-by-day itinerary
+    - Recommended hotels for boarding along with approx per night cost
     - Places of attractions around the place with details
     - Recommended restaurants with prices around the place
     - Activities around the place with details
